@@ -5,8 +5,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
-import java.util.*;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -14,36 +18,14 @@ import java.util.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "mentee")
-public class Mentee extends Auditable {
-    @OneToOne
-    private Account account;
+public class Mentee extends Person{
 
-    private String name;
-
-    @Enumerated(value = EnumType.STRING)
-    private Gender gender;
+    @OneToMany(mappedBy = "mentor")
+    private List<Company> companies;
 
     @OneToMany(mappedBy = "mentee")
     private List<Session> sessions = new ArrayList();
 
     @OneToOne
-    private Session activeSession =null;
-
-    private  String phoneNumber;
-
-    @Temporal(value = TemporalType.DATE)
-    private Date dob;
-
-    @OneToOne
-    private Address address;
-
-    @OneToOne
-    private College college;
-
-    @OneToMany(mappedBy = "mentee")
-    private List<Company> companies;
-
-    @OneToOne
-    private Feedback feedback;
-
+    private Session activeSession = null;
 }

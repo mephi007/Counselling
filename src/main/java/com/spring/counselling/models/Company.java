@@ -17,10 +17,10 @@ import javax.persistence.Table;
 @Table(name = "company")
 public class Company extends Auditable {
     @ManyToOne
-    private Mentee mentee;
+    private Person mentee;
 
     @ManyToOne
-    private Mentor Mentee;
+    private Person mentor;
 
     private String name;
     private int expYear;
