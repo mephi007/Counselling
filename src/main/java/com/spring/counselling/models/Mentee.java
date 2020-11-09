@@ -28,4 +28,7 @@ public class Mentee extends Person{
 
     @OneToOne
     private Session activeSession = null;
+
+    @OneToOne
+    private College college;
 }
