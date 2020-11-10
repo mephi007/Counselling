@@ -17,6 +17,4 @@ public class Account extends Auditable {
     @Column(unique = true, nullable = false)
     private String username;
     private String password;
-    @Enumerated(value = EnumType.STRING)
-    private Role role;
 }

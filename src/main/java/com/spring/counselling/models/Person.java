@@ -13,8 +13,9 @@ import java.util.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Inheritance(strategy=InheritanceType.JOINED)
 @Table(name = "person")
-public class Person extends Auditable {
+public abstract class Person extends Auditable {
     @OneToOne
     private Account account;
 
