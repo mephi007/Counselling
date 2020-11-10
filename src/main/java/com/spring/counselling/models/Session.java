@@ -25,8 +25,8 @@ public class Session extends Auditable{
     @ManyToOne
     private Mentor mentor;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
-    private Set<Mentor> mentors = new HashSet<>();
+//    @ManyToMany(cascade = CascadeType.PERSIST)
+//    private Set<Mentor> mentors = new HashSet<>();
 
     @OneToOne
     private Feedback feedbackbyMentee;
