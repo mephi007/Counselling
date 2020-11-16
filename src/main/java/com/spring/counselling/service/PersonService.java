@@ -51,4 +51,24 @@ public class PersonService {
         }
 
     }
+
+    public Mentee getMenteeByUserName(String username) {
+        Optional<Mentee> mentee = personRepository.findFirstByUsername(username);
+        if(mentee.isPresent()){
+            return mentee.get();
+        }else{
+            return null;
+        }
+    }
+
+    public boolean deleteMentee(String username) {
+        Optional<Mentee> mentee = personRepository.findFirstByUsername(username);
+        if(mentee.isPresent()){
+
+            personRepository.delete((Mentee) mentee.get());
+            return true;
+        }
+
+        return false;
+    }
 }

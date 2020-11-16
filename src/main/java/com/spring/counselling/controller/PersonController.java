@@ -7,20 +7,32 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/users/mentee")
 public class PersonController {
     @Autowired
     PersonService personService;
 
-    @PostMapping("/mentee")
-    public ResponseEntity<Person> createOrUpdate(@RequestBody Mentee mentee){
+    @PostMapping("/")
+    public ResponseEntity<Person> createOrUpdateMentee(@RequestBody Mentee mentee){
         Person person = personService.createOrUpdate(mentee);
         return new ResponseEntity<Person>(person, new HttpHeaders(), HttpStatus.OK);
+    }
+
+    @GetMapping("/{username}")
+    public ResponseEntity<Person> getMenteeByUserName(@PathVariable("username") String username){
+        Person person = personService.getMenteeByUserName(username);
+        if(person != null) {
+            return new ResponseEntity<Person>(person, new HttpHeaders(), HttpStatus.OK);
+        }else{
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @DeleteMapping("/{username}")
+    public HttpStatus deleteMenteeByUsername(@PathVariable("username") String username){
+        return personService.deleteMentee(username)==true? HttpStatus.OK : HttpStatus.BAD_REQUEST;
     }
 }
