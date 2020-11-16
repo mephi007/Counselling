@@ -1,31 +1,33 @@
 package com.spring.counselling.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.util.*;
 
 @Entity
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Component
 @Inheritance(strategy=InheritanceType.JOINED)
 @Table(name = "person")
 public abstract class Person extends Auditable {
-    @OneToOne
-    private Account account;
+
+    @Column(unique = true, nullable = false)
+    private String username;
+    private String password;
 
     private String name;
 
     @Enumerated(value = EnumType.STRING)
     private Gender gender;
 
+    @Column(unique = true, nullable = false)
     private  String phoneNumber;
 
+    @Column(unique = true, nullable = false)
     private String email;
 
     @Temporal(value = TemporalType.DATE)

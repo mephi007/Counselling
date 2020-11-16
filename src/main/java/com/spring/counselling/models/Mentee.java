@@ -1,9 +1,7 @@
 package com.spring.counselling.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -13,14 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Component
 @Table(name = "mentee")
 public class Mentee extends Person{
 
-    @OneToMany(mappedBy = "mentor")
+    @OneToMany(mappedBy = "mentee")
     private List<Company> companies;
 
     @OneToMany(mappedBy = "mentee")
@@ -31,4 +29,6 @@ public class Mentee extends Person{
 
     @OneToOne
     private College college;
+
+
 }
