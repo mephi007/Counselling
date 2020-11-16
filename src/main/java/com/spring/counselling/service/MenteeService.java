@@ -10,14 +10,14 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class PersonService {
+public class MenteeService {
     @Autowired
     PersonRepository personRepository;
 
     @Autowired
     MenteeRepository menteeRepository;
 
-    public Mentee createOrUpdate(Mentee mentee){
+    public Mentee createOrUpdateMentee(Mentee mentee){
         Optional<Person> person = menteeRepository.findFirstByUsername(mentee.getUsername());
         if(person.isPresent()){
             Mentee newMentee = (Mentee) person.get();
